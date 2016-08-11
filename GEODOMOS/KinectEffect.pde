@@ -1,44 +1,60 @@
 class KinectEffect {
+ 
+  
   KinectEffect() {
     println(" kinect effect");
   }
-
+  
+  void init(){
+  }
+  
   void update() {
     println("HEY");
   }
 
-  void loadOpenCV() {
-    src = kinect.getDepthImage();
-    opencv.loadImage(src);
-    opencv.inRange(lowThresh, highThresh);
-  }
+void getThreshold(){
+  threshold.set("low", lowThresh/255.0);
+    threshold.set("high", highThresh/255.0);
+    src.beginDraw();
+    src.shader(threshold);
+    src.image(kinect.getDepthImage(), 0, 0, src.width, src.height);
+    src.endDraw();
+    
+     // Applying the blur shader along the vertical direction   
+  blur.set("horizontalPass", 0);
+  blur1.beginDraw();            
+  blur1.shader(blur);  
+  blur1.image(src, 0, 0);
+  blur1.endDraw();
+  
+  // Applying the blur shader along the horizontal direction      
+  blur.set("horizontalPass", 1);
+  blur2.beginDraw();            
+  blur2.shader(blur);  
+  blur2.image(blur1, 0, 0);
+  blur2.endDraw();    
+  
+  threshold.set("low", 0.1);
+    threshold.set("high", 1.0);
+  output.beginDraw();
+  output.shader(threshold);  
+  output.image(blur2, 0, 0);
+  output.endDraw(); 
+}
+
+ 
 
   ArrayList<Contour> getContours() {
-    /* opencv.dilate();
+  /*  opencv.dilate();
      opencv.dilate();
      opencv.erode();
      opencv.blur(2);*/
-    thresh = opencv.getOutput();
+   // thresh = opencv.getOutput();
+    opencv.loadImage(blur2);
     return opencv.findContours(false, true);
   }
 
-/* List<Vec2D> contourToSpline(Contour c, float tightness, int spacing) {
-    List<Vec2D> vertices = new ArrayList<Vec2D>();
-  //  List <Vec2D> splineVert = new List<Vec2D>();
-    ArrayList<PVector> approxPts = c.getPoints();
-     Rectangle2D r = c.getBoundingBox();
-    PVector offset = new PVector((int)(r.getWidth()/2), (int)(r.getHeight()/2));
-    if (approxPts.size()> 2) {   
-      for (PVector point : approxPts) {
-        vertices.add(new Vec2D(point.x-offset.x, point.y-offset.y));
-      }
-      Spline2D s=new Spline2D(vertices);
-      s.setTightness(tightness);
-      return s.getDecimatedVertices(spacing, true);
-    } else {
-      return vertices;
-    }
-  }*/
+
 
 PShape contourToShape(Contour c, Rectangle2D r) {
   
@@ -97,9 +113,8 @@ PShape contourToShape(Contour c, float tightness, int spacing, boolean equalSpac
     opencv.erode();
     opencv.blur(2);
     opencv.calculateOpticalFlow();
-    thresh = opencv.getOutput();
     stroke(255, 0, 0);
-    image(thresh, 0, 0);
+  //  image(thresh, 0, 0);
     opencv.drawOpticalFlow();
   }
 
