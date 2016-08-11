@@ -1,10 +1,13 @@
+import processing.opengl.*;
 import javax.swing.JFrame;
 import java.awt.Frame;
 import java.awt.BorderLayout;
 import controlP5.*;
 import org.openkinect.freenect.*;
 import org.openkinect.processing.*;
-
+import java.util.*;
+ import java.awt.geom.*;
+import toxi.geom.*;
 import gab.opencv.*;
 
 int SOURCE_WIDTH = 640;
@@ -27,11 +30,13 @@ ArrayList<Contour> polygons;
 PImage thresh, src;
 PGraphics render, debug;
 
-int lowThresh, highThresh, minArea, maxArea, contourApprox, blending;
+int lowThresh, highThresh, minArea, maxArea, contourApprox, blending, splinePoints, numReps;
+float splineTightness;
+boolean drawDebug, spacingMode, useSpline;
 
 void setup() 
 {
-  size(displayWidth, displayHeight, P3D); 
+  size(displayWidth, displayHeight, OPENGL); 
    background(0);
    initKinect();
    ke = new KinectEffect[2];
@@ -40,7 +45,7 @@ void setup()
 
  
    /* draw output to render PGraphics, and draw any debugging information to debug */
-   render = createGraphics(displayWidth, displayHeight);
+   render = createGraphics(displayWidth, displayHeight, OPENGL);
    //debug = createGraphics(kinect.width, kinect.height);
    debug = createGraphics(800, 600);
    /* setup gui */
