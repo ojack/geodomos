@@ -43,12 +43,26 @@ public class ControlFrame extends PApplet {
 		cp5.addButton("stripe").plugTo(parent,"stripe").setPosition(10,y_pos);
 		y_pos+=20;
 		y_pos+=20;
+		cp5.addLabel("Following controllers sometimes fail: not important: should be controlled by kinect.").setPosition(10,y_pos);
+		y_pos+=20;
+		cp5.addLabel("Subdivisions are also controlled by letf and right arrows.").setPosition(10,y_pos);
+		y_pos+=20;
+		cp5.addLabel("Next three controlleres: just testing which ones worked fine, but none seems to do so.").setPosition(10,y_pos);
+		y_pos+=20;
+		cp5.addLabel("Insist: they should be controlled by kinect").setPosition(10,y_pos);
+		y_pos+=20;
+		cp5.addLabel("Meaning that the ICOSUBDIVISION field/parameter of the IcosahedronEffect,").setPosition(10,y_pos);
+		y_pos+=20;
+		cp5.addLabel("should be controlled by kinect.").setPosition(10,y_pos);
+		y_pos+=20;
+		cp5.addLabel("The thing is don't know exactly how.").setPosition(10,y_pos);
+		y_pos+=20;
 		cp5.addSlider("subdivisions").plugTo(parent,"subdivisions").setNumberOfTickMarks(4).setRange(0,3).setPosition(10,y_pos).setValue(0);
 		y_pos+=20;
 		cp5.addNumberbox("subdivisions2").plugTo(parent,"subdivisions").setRange(0,3).setPosition(10,y_pos).setValue(0);
 		y_pos+=20;
-		cp5.addButtonBar("subdivisions3").addItems(split("0 1 2 3"," ")).plugTo(parent,"subdivisions3").setPosition(10,y_pos);
 		y_pos+=20;
+		cp5.addButtonBar("subdivisions3").addItems(split("0 1 2 3"," ")).plugTo(parent,"subdivisions3").setPosition(10,y_pos);
 	}
 	void reds() {
 		println("reds");
