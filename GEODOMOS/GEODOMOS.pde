@@ -36,7 +36,7 @@ ArrayList<Contour> polygons;
 
 PGraphics render, debug;
 
-int effectIndex = 4;
+int effectIndex = 0;
 
 int lowThresh, highThresh, minArea, maxArea, contourApprox, blending, splinePoints, numReps;
 float splineTightness, t_scale, beatInfluence, shadowScale, lineOffsetX, lineOffsetY, lineAnimXScale, lineAnimYScale, rotationAnimation, sWeight,  strokeOpacity, rotXSpeed,rotYSpeed;
@@ -144,7 +144,7 @@ void initKinect(){
 }
 
 void updateEffectIndex(){
-  println("key"+ key);
+ // println("key"+ key);
   if (effectKeyCode == RIGHT) {
      effectIndex += 1;
      if(effectIndex >= ke.length)effectIndex = 0;
@@ -161,6 +161,7 @@ void updateEffectIndex(){
    } else if(effectKey =='0'){
      ke[effectIndex].init(0);
    }
+    println("key"+ effectIndex);
 }
 void keyPressed(){
  // println(key);

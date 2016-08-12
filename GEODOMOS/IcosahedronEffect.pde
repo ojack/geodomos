@@ -30,6 +30,13 @@ class IcosahedronEffect extends KinectEffect{
                  icoShader.set("renderRes", float(displayWidth), float(displayHeight));
 
 	} 
+
+        void init(int index){
+           render.beginDraw();
+           render.resetShader();
+           render.fill(0, 0, 0, 255);
+          render.rect(0, 0, width, height);
+        }
 	void set_subdivisions(int subdivs) {
                // ico = new Icosahedron();
 		println("subdivs: "+subdivs);
@@ -129,6 +136,7 @@ class IcosahedronEffect extends KinectEffect{
                  icoShader.set("texture2", blur2);
                  icoShader.set("bodyTexture", icoGraphics);
                 render.beginDraw();
+                render.blendMode(BLEND);
                 render.shader(icoShader);
                /* render.blendMode(BLEND);
                  render.image(blur2, 0, 0, render.width, render.height);
