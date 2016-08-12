@@ -24,7 +24,7 @@ class IcosahedronEffect extends KinectEffect{
 		//is_showing = true;
 		details = new IcosehedronDetails(ico,is_showing);
 		colors_original();
-                ico = createGraphics(displayWidth, displayHeight, OPENGL);
+                icoGraphics = createGraphics(displayWidth, displayHeight, OPENGL);
 
 	} 
 	void set_subdivisions(int subdivs) {
@@ -53,24 +53,25 @@ class IcosahedronEffect extends KinectEffect{
 		ry +=rotYSpeed; 
 		// float ry = frameCount / 430.f;
 		// ry = frameCount / 430.f;
+                icoGraphics.beginDraw();
+                
+		icoGraphics.background(0);
 
-		background(0);
-
-		fill( 255,0,0 );
+		icoGraphics.fill( 255,0,0 );
 		PVector f1 = new PVector();
 		PVector f2 = new PVector();
 		PVector f3 = new PVector();
 		int color_index = 0;
 		//stroke( 0 );
                 
-                noStroke();
+                icoGraphics.noStroke();
 
-		pushMatrix();
-               translate(render.width/2, render.height/2);
+		icoGraphics.pushMatrix();
+               icoGraphics.translate(render.width/2, render.height/2);
 		if(is_transforming&&is_translating)translate( width * 0.5, height * 0.5, 0 );
 		if (is_transforming&&is_rotating) {
-			rotateX( rx );
-			rotateY( ry );
+			icoGraphics.rotateX( rx );
+			icoGraphics.rotateY( ry );
 		}
 		int vertices_amount = ico.vertexList.size();
               //  println(vertices_amount);
@@ -86,29 +87,29 @@ class IcosahedronEffect extends KinectEffect{
 			f3.y = ico.vertexList.get(i+7) * radius;
 			f3.z = ico.vertexList.get(i+8) * radius;
 			if (color_index == 0) {
-				fill(c0 );
+				icoGraphics.fill(c0 );
 				color_index++;
 			} else if (color_index == 1) {
-				fill(c1 );
+				icoGraphics.fill(c1 );
 				color_index++;
 			} else if (color_index == 2) {
-				fill(c2 );
+				icoGraphics.fill(c2 );
 				color_index++;
 			} else {
-				fill(c3 );
+				icoGraphics.fill(c3 );
 				color_index = 0;
 			}
-			beginShape();
-			vertex( f1.x, f1.y, f1.z );
-			vertex( f2.x, f2.y, f2.z );
-			vertex( f3.x, f3.y, f3.z );
-			endShape( CLOSE );
+			icoGraphics.beginShape();
+			icoGraphics.vertex( f1.x, f1.y, f1.z );
+			icoGraphics.vertex( f2.x, f2.y, f2.z );
+			icoGraphics.vertex( f3.x, f3.y, f3.z );
+			icoGraphics.endShape( CLOSE );
 			details.repeatedVertices(f1,f2,f3,false);
 
 		}
 		details.verticesUnique(radius,false);
 		details.verticesText(radius*1.1,true);
-		popMatrix(); 
+		icoGraphics.popMatrix(); 
 		// details.verticesUnique(f1,f2,f3);
 		// 
 		if(false){
@@ -119,6 +120,10 @@ class IcosahedronEffect extends KinectEffect{
 			text("press up & down to change division",20,100);
 			text("press q & a to change radius",20,120);
 		}
+                icoGraphics.endDraw();
+                render.beginDraw();
+                render.image(icoGraphics, 0, 0);
+                render.endDraw();
 	}
 	void colors_original() {
 		int alpha = 255;
