@@ -1,8 +1,10 @@
 class IcosahedronEffect extends KinectEffect{ 
-	int ICOSUBDIVISION = 0;
+	int ICOSUBDIVISION = 2;
 	int ICOSUBDIVISION_MAX = 3;
 	Icosahedron ico;
-	int radius = 200;
+	int radius = 800;
+        int MIN_RADIUS = 300;
+        int MAX_RADIUS = 800;
 	int radius_step = 20;
 	IcosehedronDetails details;
 	int polyhedronIndex = 0;
@@ -18,14 +20,15 @@ class IcosahedronEffect extends KinectEffect{
 		// Pyramid pyramid = new Pyramid(2);
 		boolean is_showing;
 		is_showing = false;
-		is_showing = true;
+		//is_showing = true;
 		details = new IcosehedronDetails(ico,is_showing);
 		colors_original();
 
 	} 
 	void set_subdivisions(int subdivs) {
+               // ico = new Icosahedron();
 		println("subdivs: "+subdivs);
-		ICOSUBDIVISION = subdivs;
+		ICOSUBDIVISION = (int)subdivs;
 		try {
 			ico.init(ICOSUBDIVISION);
 			
@@ -37,9 +40,9 @@ class IcosahedronEffect extends KinectEffect{
 	float rx=0;
 	float ry=0;
 	color c0,c1,c2,c3;
-	void update(float amplitude) {
+	void update() {
 		// int amp = int(amplitude);
-		radius = int(map(amplitude,0,100,50,200));
+		radius = int(map(beatAmt,0,100,MIN_RADIUS,MAX_RADIUS));
 		boolean is_translating = false;
 		boolean is_rotating = true;
 		boolean is_transforming = true;
@@ -49,15 +52,16 @@ class IcosahedronEffect extends KinectEffect{
 		// float ry = frameCount / 430.f;
 		// ry = frameCount / 430.f;
 
-		background(255);
+		background(0);
 
 		fill( 255,0,0 );
 		PVector f1 = new PVector();
 		PVector f2 = new PVector();
 		PVector f3 = new PVector();
 		int color_index = 0;
-		stroke( 0 );
-
+		//stroke( 0 );
+                
+                noStroke();
 
 		pushMatrix();
 		if(is_transforming&&is_translating)translate( width * 0.5, height * 0.5, 0 );
@@ -66,8 +70,9 @@ class IcosahedronEffect extends KinectEffect{
 			rotateY( ry );
 		}
 		int vertices_amount = ico.vertexList.size();
+              //  println(vertices_amount);
 		// since it's a list x,y,z,x,y,z,...etc there are 9 points in each vertex
-		for ( int i = 0; i < vertices_amount; i+=9 ) {
+		for ( int i = 0; i < vertices_amount-8; i+=9 ) {
 			f1.x = ico.vertexList.get(i) * radius;
 			f1.y = ico.vertexList.get(i+1) * radius;
 			f1.z = ico.vertexList.get(i+2) * radius;

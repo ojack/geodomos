@@ -12,17 +12,23 @@ class Lines extends KinectEffect {
       case 0:
         numReps = 50;
         lineScaleMode = false;
-       // c1 = color(94, 255, 205);
+        c1 = color(0, 212, 123);
+         c2 = color(125, 0, 120);
         shadowScale = 1.6;
         useSpline = false;
         contourApprox = 0;
         break;
       case 1:
-        numReps = 50;
-        lineScaleMode = true;
-        c1 = color(255, 159, 100);
+        numReps = 11;
+        lineScaleMode = false;
+        c1 = color(0, 212, 123);
+         c2 = color(125, 0, 120);
+         sWeight = 20.0;
+         strokeOpacity = 149.0;
         shadowScale = 3.0;
-        useSpline = true;
+        useSpline = false;
+        lineAnimXScale = 1.0;
+        lineAnimYScale = 0.0;
         break;
       default:
         numReps = 4;
@@ -103,7 +109,8 @@ class Lines extends KinectEffect {
              if(scale < 1)  {
                render.stroke( (c2 >> 16) & 0xFF,  (c2 >> 8) & 0xFF,  c2 & 0xFF, strokeOpacity);
              } 
-               xOffset = sin(millis()*0.0003)*200*(scale-1)*lineAnimXScale+sin(k*0.2+millis()*0.001)*(100+beatAmt*beatInfluence);
+               xOffset = sin(millis()*0.0003)*200*(scale-1)*lineAnimXScale+sin(scale*2*PI)*(rotationAnimation+beatAmt*beatInfluence);
+              // xOffset = sin(millis()*0.0003)*200*(scale-1)*lineAnimXScale+sin(k*0.2+millis()*0.001)*(rotationAnimation+beatAmt*beatInfluence);
                yOffset = cos(millis()*0.0001)*300*(scale-1)*lineAnimYScale;
                if(contourIndex%2==0) xOffset = -xOffset;
           

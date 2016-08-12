@@ -21,7 +21,7 @@ public class ControlFrame extends PApplet {
     size(w, h);
    frameRate(25);
     cp5 = new ControlP5(this);
-    cp5.addSlider("low thresh").plugTo(parent,"lowThresh").setRange(0, 255).setPosition(10,10).setValue(146);
+    cp5.addSlider("low thresh").plugTo(parent,"lowThresh").setRange(0, 255).setPosition(10,10).setValue(133);
     cp5.addSlider("high thresh").plugTo(parent,"highThresh").setRange(0, 255).setPosition(10,30).setValue(255);
      cp5.addSlider("min area").plugTo(parent,"minArea").setRange(0, 100000).setPosition(10,50).setValue(2000);
       cp5.addSlider("contour approx: ").plugTo(parent,"contourApprox").setRange(0, 50).setPosition(10,70).setValue(10);
@@ -33,6 +33,7 @@ public class ControlFrame extends PApplet {
       cp5.addSlider("shadow scale").plugTo(parent,"shadowScale").setRange(0.0, 8.0).setPosition(10,350).setValue(3.0);
       cp5.addSlider("line anim x scale").plugTo(parent,"lineAnimXScale").setRange(0.0, 8.0).setPosition(10,370).setValue(1.0);
       cp5.addSlider("line anim y scale").plugTo(parent,"lineAnimYScale").setRange(0.0, 8.0).setPosition(10,390).setValue(1.0);
+       cp5.addSlider("rotation animation").plugTo(parent,"rotationAnimation").setRange(0.0, 200.0).setPosition(10,450).setValue(0.0);
        cp5.addSlider("stroke weight").plugTo(parent,"sWeight").setRange(0.0, 200.0).setPosition(10,410).setValue(1.0);
        cp5.addSlider("stroke opacity").plugTo(parent,"strokeOpacity").setRange(0.0, 255.0).setPosition(10,430).setValue(255.0);
       cp5.addSlider("beat influence").plugTo(parent,"beatInfluence").setRange(0.0, 1.0).setPosition(10,270).setValue(1.0);
@@ -54,6 +55,8 @@ public class ControlFrame extends PApplet {
         text(c1text, 300, 600);*/
         drawColorInfo(c1, 600, 270);
          drawColorInfo(c2, 600, 600);
+         
+         ellipse(20, 20, beatAmt, beatAmt);
       //image(kinect.getDepthImage(), 0, 0);
    // if(drawDebug) image(src, 0, 0);
   }

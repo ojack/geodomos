@@ -39,7 +39,7 @@ PGraphics render, debug;
 int effectIndex = 0;
 
 int lowThresh, highThresh, minArea, maxArea, contourApprox, blending, splinePoints, numReps;
-float splineTightness, t_scale, beatInfluence, shadowScale, lineOffsetX, lineOffsetY, lineAnimXScale, lineAnimYScale, sWeight,  strokeOpacity;
+float splineTightness, t_scale, beatInfluence, shadowScale, lineOffsetX, lineOffsetY, lineAnimXScale, lineAnimYScale, rotationAnimation, sWeight,  strokeOpacity;
 boolean drawDebug, spacingMode, useSpline, lineScaleMode;
 color c1, c2;
 
@@ -115,7 +115,7 @@ void draw(){
  
   beatAmt *= 0.95;
   if ( beatAmt < 0 ) beatAmt = 0;
- ellipse(20, 20, beatAmt, beatAmt);
+ // ellipse(20, 20, beatAmt, beatAmt);
 }
 
 public void myTest(){

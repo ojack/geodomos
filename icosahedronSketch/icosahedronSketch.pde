@@ -36,7 +36,7 @@ float rotXSpeed,rotYSpeed;
 
 
 void setup() {
-	size( 800,600, P3D );
+	size( 1000,800, P3D );
 	cam = new PeasyCam(this, 500);
 	// ico = new Icosahedron();
 	noStroke();
@@ -104,7 +104,7 @@ void pyramidRest() {
 	((IcosahedronEffect)ke[0]).setPolyhedron(2);
 }
 void stripe() {
-	((IcosahedronEffect)ke[0]).setPolyhedron(4);
+	((IcosahedronEffect)ke[0]).setPolyhedron(3);
 }
 void subdivisions(int ev) {
 	println("ev: "+ev);
