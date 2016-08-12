@@ -9,10 +9,12 @@ class IcosahedronEffect extends KinectEffect{
 	IcosehedronDetails details;
 	int polyhedronIndex = 0;
         PGraphics icoGraphics;
+       PShader icoShader;
         
 	IcosahedronEffect () {  
 		println("IcosahedronEffect");
 		println("1");
+                icoShader = loadShader("icoBlend.glsl");
 		ico = new Icosahedron();
 		// println("2");
 		setPyramidRest();
@@ -25,6 +27,7 @@ class IcosahedronEffect extends KinectEffect{
 		details = new IcosehedronDetails(ico,is_showing);
 		colors_original();
                 icoGraphics = createGraphics(displayWidth, displayHeight, OPENGL);
+                 icoShader.set("renderRes", float(displayWidth), float(displayHeight));
 
 	} 
 	void set_subdivisions(int subdivs) {
@@ -43,6 +46,7 @@ class IcosahedronEffect extends KinectEffect{
 	float ry=0;
 	color c0,c1,c2,c3;
 	void update() {
+                getThreshold();
 		// int amp = int(amplitude);
 		radius = int(map(beatAmt,0,100,MIN_RADIUS,MAX_RADIUS));
 		boolean is_translating = false;
@@ -121,8 +125,18 @@ class IcosahedronEffect extends KinectEffect{
 			text("press q & a to change radius",20,120);
 		}
                 icoGraphics.endDraw();
+                
+                 icoShader.set("texture2", blur2);
+                 icoShader.set("bodyTexture", icoGraphics);
                 render.beginDraw();
-                render.image(icoGraphics, 0, 0);
+                render.shader(icoShader);
+               /* render.blendMode(BLEND);
+                 render.image(blur2, 0, 0, render.width, render.height);
+                render.blendMode(ADD);
+               
+                render.image(icoGraphics, 0, 0);*/
+                render.rect(0, 0, render.width, render.height);
+                
                 render.endDraw();
 	}
 	void colors_original() {
