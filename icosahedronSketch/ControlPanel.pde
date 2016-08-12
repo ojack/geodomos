@@ -34,13 +34,13 @@ public class ControlFrame extends PApplet {
 		cp5.addButton("blues (X)").plugTo(parent,"colors_blues").setPosition(10,y_pos);
 		y_pos+=20;
 		y_pos+=20;
-		cp5.addButton("whole").plugTo(parent,"pyramid").setPosition(10,y_pos);
+		cp5.addButton("whole").plugTo(parent,"whole").setPosition(10,y_pos);
 		y_pos+=20;
 		cp5.addButton("pyramid").plugTo(parent,"pyramid").setPosition(10,y_pos);
 		y_pos+=20;
 		cp5.addButton("bottom").plugTo(parent,"pyramidRest").setPosition(10,y_pos);
 		y_pos+=20;
-		cp5.addButton("stripe").plugTo(parent,"pyramidRest").setPosition(10,y_pos);
+		cp5.addButton("stripe").plugTo(parent,"stripe").setPosition(10,y_pos);
 		y_pos+=20;
 		y_pos+=20;
 		cp5.addSlider("subdivisions").plugTo(parent,"subdivisions").setNumberOfTickMarks(4).setRange(0,3).setPosition(10,y_pos).setValue(0);
