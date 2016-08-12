@@ -36,10 +36,10 @@ ArrayList<Contour> polygons;
 
 PGraphics render, debug;
 
-int effectIndex = 0;
+int effectIndex = 4;
 
 int lowThresh, highThresh, minArea, maxArea, contourApprox, blending, splinePoints, numReps;
-float splineTightness, t_scale, beatInfluence, shadowScale, lineOffsetX, lineOffsetY, lineAnimXScale, lineAnimYScale, rotationAnimation, sWeight,  strokeOpacity;
+float splineTightness, t_scale, beatInfluence, shadowScale, lineOffsetX, lineOffsetY, lineAnimXScale, lineAnimYScale, rotationAnimation, sWeight,  strokeOpacity, rotXSpeed,rotYSpeed;
 boolean drawDebug, spacingMode, useSpline, lineScaleMode;
 color c1, c2;
 
@@ -75,11 +75,12 @@ void setup()
   beat = new BeatDetect();
   //beat.setSensitivity(300);  
  //  frameRate(25);
-  ke = new KinectEffect[4];
+  ke = new KinectEffect[5];
   ke[0] = (KinectEffect)new ExpandedShadow();
    ke[1] = (KinectEffect)new Triangles();
    ke[2] = (KinectEffect)new Grid();
    ke[3] = (KinectEffect)new Lines();
+    ke[4] = (KinectEffect)new IcosahedronEffect();
     ke[effectIndex].init(0);
 }
 

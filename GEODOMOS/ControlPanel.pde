@@ -37,6 +37,11 @@ public class ControlFrame extends PApplet {
        cp5.addSlider("stroke weight").plugTo(parent,"sWeight").setRange(0.0, 200.0).setPosition(10,410).setValue(1.0);
        cp5.addSlider("stroke opacity").plugTo(parent,"strokeOpacity").setRange(0.0, 255.0).setPosition(10,430).setValue(255.0);
       cp5.addSlider("beat influence").plugTo(parent,"beatInfluence").setRange(0.0, 1.0).setPosition(10,270).setValue(1.0);
+      int y_pos = 500;
+      cp5.addSlider("rot X Speed").plugTo(parent,"rotXSpeed").setRange(0,0.10).setPosition(10,y_pos).setValue(0.01);
+    y_pos+=20;
+    cp5.addSlider("rot Y Speed").plugTo(parent,"rotYSpeed").setRange(0,0.10).setPosition(10,y_pos).setValue(0.01);
+    y_pos+=20;
       cp5.addToggle("draw debug").plugTo(parent, "drawDebug").setValue(true).setPosition(300,10);
        cp5.addToggle("equal spacing").plugTo(parent, "spacingMode").setValue(true).setPosition(370,10);
         cp5.addToggle("use splines").plugTo(parent, "useSpline").setValue(false).setPosition(440,10);
