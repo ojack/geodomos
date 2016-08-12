@@ -11,20 +11,34 @@ class ExpandedShadow extends KinectEffect {
     switch(index){
       case 0:
         numReps = 30;
-        c1 = color(94, 255, 205);
-        shadowScale = 4.0;
+        c1 = color(228, 0, 12);
+        c2 = color(0, 182, 8);
+        shadowScale = 2.26;
+         contourApprox = 10;
         useSpline = false;
         break;
       case 1:
-        numReps = 20;
-        c1 = color(255, 159, 100);
-        shadowScale = 3.0;
+        numReps = 10;
+        c1 = color(228, 0, 12);
+        c2 = color(0, 182, 8);
+        shadowScale = 2.26;
+        contourApprox = 1;
         useSpline = true;
         break;
+      case 2:
+        numReps = 37;
+        c1 = color(228, 0, 12);
+        c2 = color(0, 182, 8);
+        shadowScale = 2.26;
+        contourApprox = 0;
+        useSpline = false;
+        break;
       default:
-        numReps = 4;
-        c1 = color(255, 255, 255);
-        shadowScale = 4.0;
+         numReps = 4;
+        c1 = color(228, 0, 12);
+        c2 = color(0, 182, 8);
+        shadowScale = 2.26;
+        contourApprox = 24;
         useSpline = false;
         break;
     }
