@@ -22,10 +22,15 @@ public class ControlFrame extends PApplet {
 		size(w, h);
 		frameRate(25);
 		cp5 = new ControlP5(this);
+		y_pos+=20;
+		cp5.addLabel("ROTATIONS SPEED").setPosition(10,y_pos);
+		y_pos+=20;
 		cp5.addSlider("rot X Speed").plugTo(parent,"rotXSpeed").setRange(0,0.25).setPosition(10,y_pos).setValue(0.0);
 		y_pos+=20;
 		cp5.addSlider("rot Y Speed").plugTo(parent,"rotYSpeed").setRange(0,0.25).setPosition(10,y_pos).setValue(0.0);
 		y_pos+=20;
+		y_pos+=20;
+		cp5.addLabel("COLORS SCHEME").setPosition(10,y_pos);
 		y_pos+=20;
 		cp5.addButton("original clrs (W)").plugTo(parent,"colors_original").setPosition(10,y_pos);
 		y_pos+=20;
@@ -33,6 +38,8 @@ public class ControlFrame extends PApplet {
 		y_pos+=20;
 		cp5.addButton("blues (X)").plugTo(parent,"colors_blues").setPosition(10,y_pos);
 		y_pos+=20;
+		y_pos+=20;
+		cp5.addLabel("PARTS OF ICOSAHEDRON DISPLAYED").setPosition(10,y_pos);
 		y_pos+=20;
 		cp5.addButton("whole").plugTo(parent,"whole").setPosition(10,y_pos);
 		y_pos+=20;
@@ -43,9 +50,11 @@ public class ControlFrame extends PApplet {
 		cp5.addButton("stripe").plugTo(parent,"stripe").setPosition(10,y_pos);
 		y_pos+=20;
 		y_pos+=20;
+		cp5.addLabel("ICOSUBDIVISION").setPosition(10,y_pos);
+		y_pos+=20;
 		cp5.addLabel("Following controllers sometimes fail: not important: should be controlled by kinect.").setPosition(10,y_pos);
 		y_pos+=20;
-		cp5.addLabel("Subdivisions are also controlled by letf and right arrows.").setPosition(10,y_pos);
+		cp5.addLabel("Subdivisions are also controlled by UP and DOWN arrows.").setPosition(10,y_pos);
 		y_pos+=20;
 		cp5.addLabel("Next three controlleres: just testing which ones worked fine, but none seems to do so.").setPosition(10,y_pos);
 		y_pos+=20;
