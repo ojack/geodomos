@@ -104,7 +104,7 @@ void pyramidRest() {
 	((IcosahedronEffect)ke[0]).setPolyhedron(2);
 }
 void stripe() {
-	((IcosahedronEffect)ke[0]).setPolyhedron(4);
+	((IcosahedronEffect)ke[0]).setPolyhedron(3);
 }
 void subdivisions(int ev) {
 	println("ev: "+ev);
