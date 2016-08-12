@@ -108,6 +108,7 @@ void stripe() {
 }
 void subdivisions(int ev) {
 	println("ev: "+ev);
+	((IcosahedronEffect)ke[0]).set_subdivisions(ev);
 }
 void subdivisions3(int ev) {
 	// println("ev:3 "+ev);
