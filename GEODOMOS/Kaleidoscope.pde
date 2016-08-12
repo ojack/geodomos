@@ -14,6 +14,9 @@ class Kaleidoscope extends KinectEffect {
   void init(){
   }
   
+   void init(int index){
+  }
+  
   void update(){
   getThreshold();
      float t = float(millis());

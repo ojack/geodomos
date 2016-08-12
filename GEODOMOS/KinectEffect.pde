@@ -8,6 +8,9 @@ class KinectEffect {
   void init(){
   }
   
+   void init(int index){
+  }
+  
   void update() {
     println("HEY");
   }
