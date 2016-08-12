@@ -3,22 +3,32 @@ class Puntos extends KinectEffect {
     println("puntos");
 
   } 
-
+  void init(){
+     render.beginDraw();
+     render.resetShader();
+   render.fill(0, 0, 0, 255);
+    render.rect(0, 0, width, height);
+  
+     render.endDraw();
+     numReps = 30;
+  }
   void update() {
     shapeMode(CENTER);
     // println("DRAWING PUNTOS");
-    loadOpenCV();
+    //loadOpenCV();
+    getThreshold();
     ArrayList<Contour> c = getContours();
 
     render.beginDraw();
     
   //  render.pushMatrix();
-   
+     render.blendMode(BLEND);
     render.fill(0, 0, 0, blending);
     render.rect(0, 0, width, height);
     /*  if (drawDebug) {
      render.image(thresh, 0, 0);
      }*/
+       render.blendMode(EXCLUSION);
      render.noFill();
     render.stroke(0, 255, 255);
   
@@ -41,14 +51,15 @@ class Puntos extends KinectEffect {
         s.disableStyle();
          render.pushMatrix();
        render.translate(width/2, height/2);
-          render.scale(width/kinect.width, height/kinect.height);
+          render.scale(width/SOURCE_WIDTH, height/SOURCE_HEIGHT);
            
          //render.translate(width/2, height/2);
           render.fill(0, 255, 255, 20);
         render.stroke(0, 255, 255);
         for(int k = 0; k < numReps; k++){
-          render.shape(s, cx-kinect.width/2, cy- kinect.height/2);
-          render.scale(0.8, 0.8);
+          render.shape(s, cx-SOURCE_WIDTH/2, cy- SOURCE_HEIGHT/2-k*k);
+       //  render.shape(s, cx-SOURCE_WIDTH/2, cy - SOURCE_HEIGHT/2);
+          render.scale(0.8, 0.95);
         }
          render.popMatrix();
        /* for(int k = 0; k < numReps; k++){

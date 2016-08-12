@@ -28,8 +28,9 @@ public class ControlFrame extends PApplet {
       cp5.addSlider("blending ").plugTo(parent,"blending").setRange(0, 255).setPosition(10,90).setValue(255);
       cp5.addSlider("spline tightness").plugTo(parent,"splineTightness").setRange(-1.0, 1.0).setPosition(10,110).setValue(0.25);
        cp5.addSlider("spline points").plugTo(parent,"splinePoints").setRange(2, 300).setPosition(10,130).setValue(10);
-         cp5.addSlider("num repetitions").plugTo(parent,"numReps").setRange(1, 10).setPosition(10,150).setValue(5);
-            cp5.addSlider("triangle scale").plugTo(parent,"t_scale").setRange(0.0, 1.0).setPosition(10,250).setValue(0.5);
+         cp5.addSlider("num repetitions").plugTo(parent,"numReps").setRange(1, 50).setPosition(10,150).setValue(5);
+     cp5.addSlider("triangle scale").plugTo(parent,"t_scale").setRange(0.0, 1.0).setPosition(10,250).setValue(0.5);
+      cp5.addSlider("beat influence").plugTo(parent,"beatInfluence").setRange(0.0, 1.0).setPosition(10,270).setValue(1.0);
       cp5.addToggle("draw debug").plugTo(parent, "drawDebug").setValue(true).setPosition(300,10);
        cp5.addToggle("equal spacing").plugTo(parent, "spacingMode").setValue(true).setPosition(370,10);
         cp5.addToggle("use splines").plugTo(parent, "useSpline").setValue(false).setPosition(440,10);

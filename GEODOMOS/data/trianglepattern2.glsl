@@ -37,9 +37,9 @@ float cycle(float n)
 }
 void main( void )
 {
-    float a = (radians(60.0)) + 3.0;
+    float a = (radians(60.0)) + 3.0*sin(u_time*0.01);
 
-    float zoom = 200.0+400.0*s0;
+    float zoom = 50.0+400.0*s0;
     float speed = 0.0;
 
     vec2 c = (gl_FragCoord.xy+vec2(u_time*zoom*speed,0.0));
@@ -47,8 +47,8 @@ void main( void )
    c = ((c+vec2(c.y,0.0)*cos(a))/zoom)+vec2(floor((c.x-c.y*cos(a))/zoom),0.0);
     float n = cycle(r(floor(c*4.0))*0.2+r(floor(c*2.0))*0.3+r(floor(c))*0.5+u_time*0.125);
 
-   vec4 col = vec4(n*2.0,pow(n,2.0),0.0,1.0);
+   vec4 col = vec4(n*2.0,pow(n,1.6),0.0,1.0);
    // gl_FragColor = mix(col, texture2D(texture2, gl_FragCoord.xy/renderRes+col.xy*(0.02+0.06)), 0.5);
-   gl_FragColor = col*texture2D(texture2, gl_FragCoord.xy/renderRes+col.xy*(0.02));
+   gl_FragColor = col*texture2D(texture2, gl_FragCoord.xy/renderRes-col.xy*(0.001+(0.0008)*beat));
 }
 

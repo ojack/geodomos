@@ -71,7 +71,7 @@ PShape contourToShape(Contour c, Rectangle2D r) {
          shp.vertex(p.x-cx, p.y-cy);
       }
 
-      shp.endShape();
+      shp.endShape(CLOSE);
     
     return shp;
   }
