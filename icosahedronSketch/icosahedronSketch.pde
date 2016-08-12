@@ -41,7 +41,7 @@ void setup() {
 	// ico = new Icosahedron();
 	noStroke();
 	fill( 255,0,0 );
-	ke = new KinectEffect[2];
+	ke = new KinectEffect[1];
 
 	ke[0] = (KinectEffect)new IcosahedronEffect();
 	minim = new Minim(this);
@@ -81,7 +81,7 @@ void draw() {
 }
 
 void keyPressed() {
-	ke[0].keyPressed();
+	((IcosahedronEffect)ke[0]).keyPressed();
 }
 void reds() {
 	((IcosahedronEffect)ke[0]).colors_red();
