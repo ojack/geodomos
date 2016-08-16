@@ -82,10 +82,7 @@ public class ControlFrame extends PApplet {
 		y_pos+=20;
 		cp5.addButton("save current").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
 		y_pos+=20;
-		cp5.addTextfield("file name").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
-		y_pos+=20;
-		y_pos+=20;
-		cp5.addTextfield("file name2").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
+		cp5.addTextfield("preset name").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
 
 	}
 	void reds() {

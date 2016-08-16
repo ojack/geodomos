@@ -20,9 +20,10 @@ float beatAmt = 0;
 private ControlP5 cp5;
 ControlFrame cf;
 CheckBox checkbox;
-String path = "C:/Users/alvaro/Dropbox/processing/geodomos/icosahedronSketch/data/";
 PGraphics render, debug;
 
+String path = "C:/Users/alvaro/Dropbox/processing/geodomos/icosahedronSketch/data/";
+String presets_path = path + "presets.json";
 /* OpenProcessing Tweak of *@*http://www.openprocessing.org/sketch/92464*@* */
 /* !do not delete the line above, required for linking your tweak if you upload again */
 
@@ -35,12 +36,28 @@ KinectEffect [] ke;
 float rotXSpeed,rotYSpeed; 
 
 DirectoryReader reader = new DirectoryReader();
-
+int current_effect_index=0;
 void setup() {
 	size( 800,600, P3D );
 	println("setup");
 	// println("reader: "+reader);
 	String[] filenames = reader.listFileNames(path);
+	JSONObject json = new JSONObject();
+	try{
+
+		json = loadJSONObject(presets_path);
+	}catch (Exception e) {
+		println("e: "+e);	
+		println("File does NOT exist");
+	}
+
+	if(json!=null){
+
+		println(json);
+	}else{
+		println("File does NOT exist");
+		
+	}
 	if(filenames!=null){
 		println(filenames);
 
@@ -52,7 +69,7 @@ void setup() {
 	fill( 255,0,0 );
 	ke = new KinectEffect[1];
 
-	ke[0] = (KinectEffect)new IcosahedronEffect();
+	ke[current_effect_index] = (KinectEffect)new IcosahedronEffect();
 	minim = new Minim(this);
 
 	// use the getLineIn method of the Minim object to get an AudioInput
@@ -132,5 +149,9 @@ void save_presets() {
 	// println("hhhhhh");
 	JSONObject j  = ke[0].get_settings();
 	println("j: "+j);
+	j.setInt("current_effect_index",current_effect_index);
+	j.setString("name","nammmannamamnaae");
+	saveJSONObject(j, presets_path);
+
 	
 }
