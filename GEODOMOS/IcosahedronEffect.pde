@@ -51,7 +51,7 @@ class IcosahedronEffect extends KinectEffect{
 	}
 	float rx=0;
 	float ry=0;
-	color c0,c1,c2,c3;
+	color c0,cl1,cl2,c3;
 	void update() {
                 getThreshold();
 		// int amp = int(amplitude);
@@ -101,10 +101,10 @@ class IcosahedronEffect extends KinectEffect{
 				icoGraphics.fill(c0 );
 				color_index++;
 			} else if (color_index == 1) {
-				icoGraphics.fill(c1 );
+				icoGraphics.fill(cl1 );
 				color_index++;
 			} else if (color_index == 2) {
-				icoGraphics.fill(c2 );
+				icoGraphics.fill(cl2 );
 				color_index++;
 			} else {
 				icoGraphics.fill(c3 );
@@ -135,6 +135,14 @@ class IcosahedronEffect extends KinectEffect{
                 
                  icoShader.set("texture2", blur2);
                  icoShader.set("bodyTexture", icoGraphics);
+                 int r = (c1 >> 16) & 0xFF;
+                int g = (c1 >> 8) & 0xFF;
+                int b = c1 & 0xFF;
+                 icoShader.set("c1", (float)r/255.9, (float)g/255.0, (float)b/255.0);
+                  r = (c2 >> 16) & 0xFF;
+                g = (c2 >> 8) & 0xFF;
+                b = c2 & 0xFF;
+                 icoShader.set("c2", (float)r/255.9, (float)g/255.0, (float)b/255.0);
                 render.beginDraw();
                 render.blendMode(BLEND);
                 render.shader(icoShader);
@@ -151,8 +159,8 @@ class IcosahedronEffect extends KinectEffect{
 		int alpha = 255;
 
 		c0= color( 255,60,0  ,alpha);
-		c1= color( 100,255,0 ,alpha);
-		c2= color( 255,180,0 ,alpha);
+		cl1= color( 100,255,0 ,alpha);
+		cl2= color( 255,180,0 ,alpha);
 		c3= color( 0,255,255 ,alpha);
 		
 	}
@@ -160,8 +168,8 @@ class IcosahedronEffect extends KinectEffect{
 		int alpha = 255;
 
 		c0= color( 255,60,0 ,alpha);
-		c1= color( 255,60,0 ,alpha);
-		c2= color( 255,60,0 ,alpha);
+		cl1= color( 255,60,0 ,alpha);
+		cl2= color( 255,60,0 ,alpha);
 		c3= color( 255,60,0 ,alpha);
 		
 	}
@@ -169,8 +177,8 @@ class IcosahedronEffect extends KinectEffect{
 		int alpha = 255;
 
 		c0= color( 127,60,127 ,alpha);
-		c1= color( 255,60,255 ,alpha);
-		c2= color( 127,60,255 ,alpha);
+		cl1= color( 255,60,255 ,alpha);
+		cl2= color( 127,60,255 ,alpha);
 		c3= color( 60,60,255 ,alpha);
 		
 	}

@@ -6,40 +6,59 @@ class Lines extends KinectEffect {
   void init(int index){
      render.beginDraw();
      render.resetShader();
+     render.noStroke();
    render.fill(0, 0, 0, 255);
     render.rect(0, 0, width, height);
     switch(index){
       case 0:
         numReps = 50;
-        lineScaleMode = false;
-        c1 = color(0, 212, 123);
-         c2 = color(125, 0, 120);
-        shadowScale = 1.6;
+        lineScaleMode = true;
+        c1 = color(234, 51, 0);
+         c2 = color(254, 185, 21);
+        shadowScale = 3.6;
         useSpline = false;
+         sWeight = 4.0;
+         strokeOpacity = 255.0;
         contourApprox = 0;
+        useSpline = false;
+        lineAnimXScale = 0.0;
+        lineAnimYScale = 0.0;
         break;
       case 1:
         numReps = 11;
         lineScaleMode = false;
-        c1 = color(0, 212, 123);
-         c2 = color(125, 0, 120);
+         c1 = color(6, 255, 20);
+         c2 = color(255, 116, 5);
          sWeight = 20.0;
          strokeOpacity = 149.0;
-        shadowScale = 3.0;
+        shadowScale = 1.4;
+        contourApprox = 1;
         useSpline = false;
         lineAnimXScale = 1.0;
         lineAnimYScale = 0.0;
+        break;
+      case 2:
+        numReps = 27;
+        lineScaleMode = true;
+        c1 = color(167, 254, 12);
+         c2 = color(167, 254, 12);
+        contourApprox = 8;
+         sWeight = 6.0;
+         strokeOpacity = 149.0;
+        shadowScale = 3.0;
+        useSpline = false;
+        beatInfluence = 0.5;
+        lineAnimXScale = 0.6;
+        lineAnimYScale = 0.6;
         break;
       default:
         numReps = 4;
         c1 = color(255, 255, 255);
         shadowScale = 4.0;
         useSpline = false;
-        break;
+      //  break;
     }
      render.endDraw();
-     
-     
     
   }
   void update() {
@@ -53,6 +72,7 @@ class Lines extends KinectEffect {
     
   //  render.pushMatrix();
      render.blendMode(BLEND);
+     render.noStroke();
     render.fill(0, 0, 0, blending);
     render.rect(0, 0, width, height);
     /*  if (drawDebug) {

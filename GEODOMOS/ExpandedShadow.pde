@@ -30,7 +30,7 @@ class ExpandedShadow extends KinectEffect {
         c1 = color(228, 0, 12);
         c2 = color(0, 182, 8);
         shadowScale = 2.26;
-        contourApprox = 0;
+        contourApprox = 1;
         useSpline = false;
         break;
       default:
@@ -58,6 +58,7 @@ class ExpandedShadow extends KinectEffect {
     
   //  render.pushMatrix();
      render.blendMode(BLEND);
+     render.noStroke();
     render.fill(0, 0, 0, blending);
     render.rect(0, 0, width, height);
     /*  if (drawDebug) {
@@ -99,7 +100,7 @@ class ExpandedShadow extends KinectEffect {
      //   render.stroke(0, 255, 255);
        render.translate(width/2, height/2);
           render.scale(width/SOURCE_WIDTH, height/SOURCE_HEIGHT);
-          float stepAmt = shadowScale/numReps;
+          float stepAmt = shadowScale/(numReps-numReps*beatInfluence*beatAmt/100);
           float scale = shadowScale;
            for(int k = 0; k < numReps; k++){
              render.shape(s, cx-SOURCE_WIDTH/2, cy- SOURCE_HEIGHT/2, w*scale, h*scale);

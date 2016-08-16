@@ -71,20 +71,23 @@ void main() {
   vec2 st = gl_FragCoord.xy/renderRes;
 
      // Use a matrix to rotate the space 45 degrees
-    st = rotate2D(st,PI*sin(0.00025*u_time));  
+    //st = rotate2D(st,PI*0.25);  
 
     // Divide the space in 4
    // st = tile(st,time);
    st = movingTiles(st, 4.0, 0.5);
   // st = clamp(st, 0.3, 1.0);
-   vec4 col1 = vec4(c1, 1.0)*texture2D(texture2, st);
-   vec2 r = gl_FragCoord.xy/renderRes;
- // vec2 mirror = vec2(0.5+abs(r.x-0.5), r.y);
-   vec2 mirror = vec2(1.0-r.x, r.y);
-   //vec4 col2 = texture2D(texture2, mirror);
-   vec4 col2 = (texture2D(texture2, r)+texture2D(texture2, mirror))/2.0*vec4(c2, 1.0);
-   //gl_FragColor = mix(col2, col1, 0.5);
+
+   vec4 col2 = texture2D(texture2, gl_FragCoord.xy/renderRes)*vec4(c1, 1.0);
+   vec4 col1 = texture2D(bodyTexture, (gl_FragCoord.xy+vec2(col2*100.0))/renderRes)*vec4(c2, 1.0);
+  
+  
+  // gl_FragColor = texture2D(texture2, gl_FragCoord.xy/renderRes);
+  
+//   gl_FragColor = mix(col1, col2, 0.5);
+
    gl_FragColor = vec4(abs(col2.xyz-col1.xyz), 1.0);
+
  //  gl_FragColor = texture2D(texture2, st);
 // gl_FragColor = texture2D(texture2, gl_FragCoord.xy/renderRes);
  //gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0); 

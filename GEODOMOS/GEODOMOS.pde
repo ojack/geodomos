@@ -160,6 +160,8 @@ void updateEffectIndex(){
      ke[effectIndex].init(2);
    } else if(effectKey =='0'){
      ke[effectIndex].init(0);
+    } else if(effectKey =='3'){
+     ke[effectIndex].init(3);
    }
     println("key"+ effectIndex);
 }
