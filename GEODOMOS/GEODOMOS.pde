@@ -39,8 +39,13 @@ PGraphics render, debug;
 int effectIndex = 0;
 
 int lowThresh, highThresh, minArea, maxArea, contourApprox, blending, splinePoints, numReps;
-float splineTightness, t_scale, beatInfluence;
-boolean drawDebug, spacingMode, useSpline;
+float splineTightness, t_scale, beatInfluence, shadowScale, lineOffsetX, lineOffsetY, lineAnimXScale, lineAnimYScale, rotationAnimation, sWeight,  strokeOpacity, rotXSpeed,rotYSpeed;
+boolean drawDebug, spacingMode, useSpline, lineScaleMode;
+color c1, c2;
+
+boolean updateEffect = false;
+char effectKey = ' ';
+int effectKeyCode = ' ';
 
 PShader blur, threshold;
 PGraphics src, blur1, blur2, output;
@@ -51,7 +56,7 @@ void setup()
   size(displayWidth, displayHeight, OPENGL); 
    background(0);
    initKinect();
-   ke = new KinectEffect[3];
+  
 
   
  
@@ -70,12 +75,20 @@ void setup()
   beat = new BeatDetect();
   //beat.setSensitivity(300);  
  //  frameRate(25);
-  ke[0] = (KinectEffect)new Puntos();
+  ke = new KinectEffect[5];
+  ke[0] = (KinectEffect)new ExpandedShadow();
    ke[1] = (KinectEffect)new Triangles();
    ke[2] = (KinectEffect)new Grid();
+   ke[3] = (KinectEffect)new Lines();
+    ke[4] = (KinectEffect)new IcosahedronEffect();
+    ke[effectIndex].init(0);
 }
 
 void draw(){
+  if(updateEffect){
+    updateEffectIndex();
+    updateEffect = false;
+  }
   beat.detect(in.mix);
   numFrames++;
   frame.setTitle("" + frameRate);
@@ -103,7 +116,11 @@ void draw(){
  
   beatAmt *= 0.95;
   if ( beatAmt < 0 ) beatAmt = 0;
- ellipse(20, 20, beatAmt, beatAmt);
+ // ellipse(20, 20, beatAmt, beatAmt);
+}
+
+public void myTest(){
+  println("MY TEST");
 }
 
 void initKinect(){
@@ -126,16 +143,33 @@ void initKinect(){
      output.noSmooth();
 }
 
-void keyPressed(){
-   if (keyCode == RIGHT) {
+void updateEffectIndex(){
+ // println("key"+ key);
+  if (effectKeyCode == RIGHT) {
      effectIndex += 1;
      if(effectIndex >= ke.length)effectIndex = 0;
-     ke[effectIndex].init();
-   } else if(keyCode==LEFT){
+     ke[effectIndex].init(0);
+   } else if(effectKeyCode==LEFT){
      effectIndex--;
       if(effectIndex < 0) effectIndex = ke.length - 1;
-      ke[effectIndex].init();
+      ke[effectIndex].init(0);
+   } else if(effectKey =='1'){
+     println("KEY");
+     ke[effectIndex].init(1);
+   } else if(effectKey =='2'){
+     ke[effectIndex].init(2);
+   } else if(effectKey =='0'){
+     ke[effectIndex].init(0);
+    } else if(effectKey =='3'){
+     ke[effectIndex].init(3);
    }
+    println("key"+ effectIndex);
+}
+void keyPressed(){
+ // println(key);
+  effectKey = key;
+  effectKeyCode = keyCode;
+   updateEffectIndex();
   
 }
 

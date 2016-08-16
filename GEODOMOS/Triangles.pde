@@ -13,7 +13,7 @@ class Triangles extends KinectEffect {
     //  cp5.getController("triangle scale").setValue(0.01);
   } 
   
-  void init(){
+  void init(int index){
     render.beginDraw();
     render.blendMode(BLEND);
      render.endDraw();
