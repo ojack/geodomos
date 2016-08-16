@@ -7,10 +7,10 @@ class Polyhedron{
 	void init(int ICOSUBDIVISION) {
 		vertexNormalsList = new ArrayList<Float>();
 		vertexList = new ArrayList<Float>();
-		println("init");
+		// println("init");
 		// println("po. tindices: "+tindices);
 		// println("po. tindices: "+tindices.length);
-		println("po. vdata: "+vdata);
+		// println("po. vdata: "+vdata);
 		// Iterate over points
 		// 
 		try {

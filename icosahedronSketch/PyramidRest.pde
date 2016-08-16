@@ -10,9 +10,6 @@ class PyramidRest extends Icosahedron {
 	};	
 */
 	PyramidRest(int A) {
-		println("Pyramid");
-		// init(ICOSUBDIVISION);
-
 		
 		tindices = new int[][]{ 
 			{ 0, 4, 1 },
@@ -41,9 +38,6 @@ class PyramidRest extends Icosahedron {
 
 			{ 7, 2, 11 }
 		};
-		// println("py. tindices: "+tindices);
-		println("ic. vdata: "+vdata);
-		// super(0);
 		
 	}
 

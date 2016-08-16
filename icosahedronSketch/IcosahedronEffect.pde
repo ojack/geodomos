@@ -8,10 +8,7 @@ class IcosahedronEffect extends KinectEffect{
 	int polyhedronIndex = 0;
 
 	IcosahedronEffect () {  
-		println("IcosahedronEffect");
-		println("1");
 		ico = new Icosahedron();
-		// println("2");
 		setPyramidRest();
 		// println("3");
 		ico.init(ICOSUBDIVISION);
@@ -24,7 +21,7 @@ class IcosahedronEffect extends KinectEffect{
 
 	} 
 	void set_subdivisions(int subdivs) {
-		println("subdivs: "+subdivs);
+		// println("subdivs: "+subdivs);
 		ICOSUBDIVISION = subdivs;
 		try {
 			ico.init(ICOSUBDIVISION);

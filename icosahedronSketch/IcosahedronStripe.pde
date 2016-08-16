@@ -1,9 +1,6 @@
 class IcosahedronStripe extends Icosahedron {
 
 	IcosahedronStripe() {
-		println("Pyramid");
-		// init(ICOSUBDIVISION);
-
 		
 		tindices = new int[][]{ 
 			{ 0, 4, 1 },
@@ -32,9 +29,6 @@ class IcosahedronStripe extends Icosahedron {
 
 			{ 7, 2, 11 }
 		};
-		// println("py. tindices: "+tindices);
-		println("ic. vdata: "+vdata);
-		// super(0);
 		
 	}
 

@@ -30,7 +30,7 @@ class Icosahedron extends Polyhedron {
 			{ -Z, -X, 0.0f }
 		};
 		// println("ic. tindices: "+tindices);
-		println("ic. vdata: "+vdata);
+		// println("ic. vdata: "+vdata);
 
 		// super();
 		// List<Float> texCoordsList = new ArrayList<Float>();

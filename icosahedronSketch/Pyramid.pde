@@ -10,7 +10,7 @@ class Pyramid extends Icosahedron {
 	};	
 */
 	Pyramid(int A) {
-		println("Pyramid");
+		// println("Pyramid");
 		// init(ICOSUBDIVISION);
 
 		
@@ -42,7 +42,7 @@ class Pyramid extends Icosahedron {
 			// { 7, 2, 11 }
 		};
 		// println("py. tindices: "+tindices);
-		println("ic. vdata: "+vdata);
+		// println("ic. vdata: "+vdata);
 		// super(0);
 		
 	}

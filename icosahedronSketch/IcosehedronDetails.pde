@@ -4,7 +4,6 @@ public class IcosehedronDetails{
 	public IcosehedronDetails(Icosahedron ico_,boolean is_showing) {
 		is_showing=is_showing;
 		ico=ico_;
-		println("ico: "+ico);
 		int res = 5;
 		sphereDetail(res);
 	}
