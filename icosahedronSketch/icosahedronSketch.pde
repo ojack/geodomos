@@ -20,7 +20,7 @@ float beatAmt = 0;
 private ControlP5 cp5;
 ControlFrame cf;
 CheckBox checkbox;
-
+String path = "C:/Users/alvaro/Dropbox/processing/geodomos/icosahedronSketch/";
 PGraphics render, debug;
 
 /* OpenProcessing Tweak of *@*http://www.openprocessing.org/sketch/92464*@* */
@@ -34,9 +34,15 @@ KinectEffect [] ke;
 
 float rotXSpeed,rotYSpeed; 
 
+DirectoryReader reader = new DirectoryReader();
 
 void setup() {
 	size( 800,600, P3D );
+	println("setup");
+	// println("reader: "+reader);
+	String[] filenames = reader.listFileNames(path);
+	// println(filenames);
+
 	cam = new PeasyCam(this, 500);
 	// ico = new Icosahedron();
 	noStroke();
@@ -107,7 +113,7 @@ void stripe() {
 	((IcosahedronEffect)ke[0]).setPolyhedron(3);
 }
 void subdivisions(int ev) {
-	println("ev: "+ev);
+	// println("ev: "+ev);
 	((IcosahedronEffect)ke[0]).set_subdivisions(ev);
 }
 void subdivisions3(int ev) {
