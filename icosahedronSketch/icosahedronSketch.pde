@@ -20,7 +20,7 @@ float beatAmt = 0;
 private ControlP5 cp5;
 ControlFrame cf;
 CheckBox checkbox;
-String path = "C:/Users/alvaro/Dropbox/processing/geodomos/icosahedronSketch/";
+String path = "C:/Users/alvaro/Dropbox/processing/geodomos/icosahedronSketch/data/";
 PGraphics render, debug;
 
 /* OpenProcessing Tweak of *@*http://www.openprocessing.org/sketch/92464*@* */
@@ -41,7 +41,10 @@ void setup() {
 	println("setup");
 	// println("reader: "+reader);
 	String[] filenames = reader.listFileNames(path);
-	// println(filenames);
+	if(filenames!=null){
+		println(filenames);
+
+	}
 
 	cam = new PeasyCam(this, 500);
 	// ico = new Icosahedron();
@@ -60,7 +63,7 @@ void setup() {
 	// debug = createGraphics(kinect.width, kinect.height);
 	debug = createGraphics(800, 600);
 	// cp5 = new ControlP5(this);
-	cf = addControlFrame("Kinect control", 400, 800, checkbox, debug);
+	cf = addControlFrame("Kinect control", 500, 800, checkbox, debug);
 }
 boolean flag = false;
 void draw() {
@@ -123,4 +126,11 @@ void subdivisions3(int ev) {
 	// ((IcosahedronEffect)ke[0]).ICOSUBDIVISION = subdivs;
 	// ((IcosahedronEffect)ke[0]).init(subdivs);
 
+}
+void save_presets() {
+	// println("a: "+a);
+	// println("hhhhhh");
+	JSONObject j  = ke[0].get_settings();
+	println("j: "+j);
+	
 }

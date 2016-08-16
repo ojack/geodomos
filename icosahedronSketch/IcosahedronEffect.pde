@@ -199,6 +199,7 @@ class IcosahedronEffect extends KinectEffect{
 		}
 	}
 	public void setPolyhedron(int index) {
+		polyhedronIndex = index;
 		switch (index) {
 			case 0:
 				ico = new Icosahedron();
@@ -223,5 +224,14 @@ class IcosahedronEffect extends KinectEffect{
 	void setPyramidRest() {
 		
 		ico = (Icosahedron)new PyramidRest(0);
+	}
+	JSONObject get_settings() {
+		println("get_settings from ico effect");
+		JSONObject j = new JSONObject();
+		j.setInt("ICOSUBDIVISION",ICOSUBDIVISION);
+		j.setInt("polyhedronIndex",polyhedronIndex);
+		j.setFloat("rotXSpeed",rotXSpeed);
+		j.setFloat("rotYSpeed",rotYSpeed);
+		return j;
 	}
 } 

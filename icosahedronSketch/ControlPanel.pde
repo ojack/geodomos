@@ -22,6 +22,7 @@ public class ControlFrame extends PApplet {
 		size(w, h);
 		frameRate(25);
 		cp5 = new ControlP5(this);
+		set_presets();
 		y_pos+=20;
 		cp5.addLabel("ROTATIONS SPEED").setPosition(10,y_pos);
 		y_pos+=20;
@@ -72,6 +73,20 @@ public class ControlFrame extends PApplet {
 		y_pos+=20;
 		y_pos+=20;
 		cp5.addButtonBar("subdivisions3").addItems(split("0 1 2 3"," ")).plugTo(parent,"subdivisions3").setPosition(10,y_pos);
+	}
+	void set_presets() {
+		int y_pos=0;
+		int x_pos = 300;
+		cp5.addLabel("PRESETS").setPosition(x_pos,y_pos);
+		y_pos+=20;
+		y_pos+=20;
+		cp5.addButton("save current").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
+		y_pos+=20;
+		cp5.addTextfield("file name").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
+		y_pos+=20;
+		y_pos+=20;
+		cp5.addTextfield("file name2").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
+
 	}
 	void reds() {
 		println("reds");
