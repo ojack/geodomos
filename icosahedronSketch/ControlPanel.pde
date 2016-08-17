@@ -87,12 +87,12 @@ public class ControlFrame extends PApplet {
 		cp5.addButton("save current").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
 		y_pos+=20;
 		preset_name_display = cp5.addTextfield("preset name").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
-		random_word();
+		set_preset_name_to_random_word();
 		y_pos+=20;
 		y_pos+=20;
 		cp5.addButton("delete all presets").setSize(100,18).plugTo(parent,"delete_all_presets").setPosition(x_pos,y_pos);
 		y_pos+=20;
-		cp5.addButton("random name").plugTo(this,"random_word").setPosition(x_pos,y_pos);
+		cp5.addButton("random name").plugTo(parent,"set_preset_name_to_random_word").setPosition(x_pos,y_pos);
 		// println("cp5: 2 "+this.cp5);
 		y_pos+=20;
 		cp5.addLabel("SAVED PRESETS").setPosition(300,y_pos);

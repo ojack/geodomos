@@ -151,17 +151,19 @@ void subdivisions3(int ev) {
 	// ((IcosahedronEffect)ke[0]).init(subdivs);
 
 }
-void random_word() {
+void set_preset_name_to_random_word() {
 	preset_name_display.setText(generateRandomWords(1,8)[0]);
 }
 
 void save_presets() {
 	// println("a: "+a);
 	// println("hhhhhh");
-	random_word();
+	set_preset_name_to_random_word();
 	JSONObject j  = ke[0].get_settings();
 	println("j: "+j);
-	j.setInt("effect_index",effectIndex);
+	Random random = new Random();
+	int random_index_effect = random.nextInt(5);
+	j.setInt("effect_index",random_index_effect);
 	String preset_name = preset_name_display.getText();
 	presets_json.setJSONObject(preset_name,j);
 	saveJSONObject(presets_json, presets_path);
