@@ -71,23 +71,6 @@ void setup() {
 	// cp5 = new ControlP5(this);
 	presets_json = loadJSONObject(presets_path);
 	cf = addControlFrame("Kinect control", 500, 800, presets_json, debug);
-	// try{
-
-		/*
-		// println("key: "+key.next());
-		// println("key: "+key.next());
-		// println("key: "+key.next());
-		// println("key: "+key.next());
-		for (int i = 0; i < keys.size(); ++i) {
-			println("i: "+i);
-			// String value = keys[i];
-			// println("value: "+i);
-		}
-	}catch (Exception e) {
-		println("e: "+e);	
-		// println("File does NOT exist");
-	}
-		*/
 }
 boolean flag = false;
 void draw() {
