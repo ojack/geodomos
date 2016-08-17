@@ -144,14 +144,12 @@ void save_presets() {
 	// println("hhhhhh");
 	set_preset_name_to_random_word();
 	JSONObject j  = ke[0].get_settings();
-	println("j: "+j);
 	Random random = new Random();
 	int random_index_effect = random.nextInt(5);
 	j.setInt("effect_index",random_index_effect);
 	String preset_name = preset_name_display.getText();
 	presets_json.setJSONObject(preset_name,j);
 	saveJSONObject(presets_json, presets_path);
-	println("presets_json: "+presets_json);
 	
 }
 void delete_all_presets() {
