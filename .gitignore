@@ -1,1 +1,3 @@
 icosahedronSketch/build-tmp/
+**/*.sublime-project
+**/*.sublime-workspace
