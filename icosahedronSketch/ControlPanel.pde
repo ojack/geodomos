@@ -21,6 +21,7 @@ public class ControlFrame extends PApplet {
 	int y_pos = 0;
 
 	public void setup() {
+		println("setup control panel...");
 		size(w, h);
 		frameRate(25);
 		cp5 = new ControlP5(this);
@@ -70,11 +71,13 @@ public class ControlFrame extends PApplet {
 		y_pos+=20;
 		cp5.addLabel("The thing is don't know exactly how.").setPosition(10,y_pos);
 		y_pos+=20;
+		/*
 		cp5.addSlider("subdivisions").plugTo(parent,"subdivisions").setNumberOfTickMarks(4).setRange(0,3).setPosition(10,y_pos).setValue(0);
 		y_pos+=20;
 		cp5.addNumberbox("subdivisions2").plugTo(parent,"subdivisions").setRange(0,3).setPosition(10,y_pos).setValue(0);
 		y_pos+=20;
 		y_pos+=20;
+		*/
 		cp5.addButtonBar("subdivisions3").addItems(split("0 1 2 3"," ")).plugTo(parent,"subdivisions3").setPosition(10,y_pos);
 	}
 	Object[] keys_strings;
@@ -97,7 +100,6 @@ public class ControlFrame extends PApplet {
 		y_pos+=20;
 		cp5.addLabel("SAVED PRESETS").setPosition(300,y_pos);
 		y_pos+=20;
-		Iterator keys2 = presets_json.keyIterator();
 		Set keys = presets_json.keys();
 		keys_strings = keys.toArray();
 		// println("keys : "+keys);
@@ -105,19 +107,30 @@ public class ControlFrame extends PApplet {
 		// int size = presets_json.size();
 		// println("size: "+size);
 		// Iterator key = keys.iterator();
+		y_presets = y_pos;
+		show_presets_for_effectIndex();
+	}
+		int y_presets;
+	void show_presets_for_effectIndex() {
+		y_pos = y_presets;
+		Iterator keys2 = presets_json.keyIterator();
 		int count=0;
 		while (keys2.hasNext()) {
 			// println("key: "+key);
 			String item = (String)keys2.next();
-			println("item : "+item);
 			// println("item : "+item.getClass());
 			JSONObject datum = presets_json.getJSONObject(item);
 			// println("datum: "+datum);
 			// println("datum: "+datum.getClass());
 			// ke[0].parse_presets(datum);
-			this.add_preset_button(item,count);
+			if(datum.getInt("effect_index")==effectIndex){
+
+				this.add_preset_button(item,count);
+				println("item : "+item);
+			}
 			count++;
 		}
+
 	}
 	void reds() {
 		println("reds");
@@ -141,15 +154,16 @@ public class ControlFrame extends PApplet {
 		/*
 		*/
 	}
+	ArrayList<Button> preset_buttons= new ArrayList<Button>();
 	void add_preset_button(String button_label,int preset) {
 		// println("button_label: "+button_label);
 		y_pos+=20;
 		// println("cp5: "+this.cp5);
-		cp5.addButton(button_label).setPosition(300,y_pos).setSize(100,18).setValue(preset).plugTo(this,"load_presets");
+		preset_buttons.add(cp5.addButton(button_label).setPosition(300,y_pos).setSize(100,18).setValue(preset).plugTo(this,"load_presets"));
 	}
 	void load_presets(int value) {
 		println("value: "+value);
-		String var_name = (String)keys_strings[0];
+		String var_name = (String)keys_strings[value];
 		println("var_name: "+var_name);
 		JSONObject preset = presets_json.getJSONObject(var_name);
 		println("preset: "+preset);
@@ -159,7 +173,29 @@ public class ControlFrame extends PApplet {
 		return cp5;
 	}
 
+	void keyPressed() {
+		println(key);
+		println(keyCode);
+		if(keyCode==39||keyCode==37){
+			if(keyCode==39){
 
+				effectIndex++;
+			}
+			if(keyCode==37){
+
+				effectIndex--;
+			}
+			println("effectIndex: "+effectIndex);
+			int size = preset_buttons.size();
+			println("size: "+size);
+			for (int i = 0; i < size; ++i) {
+				println("i: "+i);
+				preset_buttons.get(i).remove();
+			}
+			preset_buttons.clear();
+			show_presets_for_effectIndex();
+		}
+	}
 	ControlP5 cp5;
 
 	Object parent;

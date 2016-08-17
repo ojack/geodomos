@@ -38,10 +38,11 @@ class IcosahedronEffect extends KinectEffect{
 	void update() {
 		// int amp = int(amplitude);
 		radius = int(map(beatAmt,0,100,MIN_RADIUS,MAX_RADIUS));
+		// radius = 300;
 		boolean is_translating = false;
 		boolean is_rotating = true;
 		boolean is_transforming = true;
-		// float rx = frameCount / 800.f;
+		// float rx = frIcosahedronEffectameCount / 800.f;
 		rx +=rotXSpeed; 
 		ry +=rotYSpeed; 
 		// float ry = frameCount / 430.f;
@@ -54,9 +55,9 @@ class IcosahedronEffect extends KinectEffect{
 		PVector f2 = new PVector();
 		PVector f3 = new PVector();
 		int color_index = 0;
-		//stroke( 0 );
+		stroke( 0 );
                 
-                noStroke();
+                // noStroke();
 
 		pushMatrix();
 		if(is_transforming&&is_translating)translate( width * 0.5, height * 0.5, 0 );
@@ -238,6 +239,7 @@ class IcosahedronEffect extends KinectEffect{
 		return j;
 	}
 	void parse_presets(JSONObject j) {
+
 		println("j: "+j);
 		
 	}

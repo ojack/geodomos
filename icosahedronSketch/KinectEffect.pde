@@ -2,7 +2,7 @@ class KinectEffect {
   KinectEffect(){
   }
   
-  void update(float amplitude){
+  void update(){
   }
   JSONObject get_settings() {
   	return new JSONObject();

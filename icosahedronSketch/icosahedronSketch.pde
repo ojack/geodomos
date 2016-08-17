@@ -56,9 +56,9 @@ void setup() {
 	noStroke();
 	fill( 255,0,0 );
 	ke = new KinectEffect[1];
-
-
 	ke[effectIndex] = (KinectEffect)new IcosahedronEffect();
+
+
 	minim = new Minim(this);
 
 	// use the getLineIn method of the Minim object to get an AudioInput
@@ -91,9 +91,10 @@ void draw() {
 	// text("press q & a to change radius",20,120);
 	beatAmt *= 0.95;
 	if ( beatAmt < 0 ) beatAmt = 0;
-	ellipse(20, 20, beatAmt, beatAmt);
-
-	ke[0].update(beatAmt);
+	// ellipse(20, 20, beatAmt, beatAmt);
+	int length = ke.length;
+	// println("length: "+length);
+	ke[0].update();
 }
 
 void keyPressed() {
