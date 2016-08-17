@@ -237,4 +237,8 @@ class IcosahedronEffect extends KinectEffect{
 		j.setFloat("rotYSpeed",rotYSpeed);
 		return j;
 	}
+	void parse_presets(JSONObject j) {
+		println("j: "+j);
+		
+	}
 } 

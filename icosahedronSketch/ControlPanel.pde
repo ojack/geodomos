@@ -1,6 +1,8 @@
-ControlFrame addControlFrame(String theName, int theWidth, int theHeight, CheckBox checkbox, PGraphics debug) {
+Textfield preset_name_display;
+
+ControlFrame addControlFrame(String theName, int theWidth, int theHeight, JSONObject j, PGraphics debug) {
 	Frame f = new Frame(theName);
-	ControlFrame p = new ControlFrame(this, theWidth, theHeight, checkbox, debug);
+	ControlFrame p = new ControlFrame(this, theWidth, theHeight, j, debug);
 	f.add(p);
 	p.init();
 	f.setTitle(theName);
@@ -14,7 +16,7 @@ ControlFrame addControlFrame(String theName, int theWidth, int theHeight, CheckB
 public class ControlFrame extends PApplet {
 
 	int w, h;
-	CheckBox checkbox;
+	JSONObject presets_json;
 	int abc = 100;
 	int y_pos = 0;
 
@@ -23,6 +25,7 @@ public class ControlFrame extends PApplet {
 		frameRate(25);
 		cp5 = new ControlP5(this);
 		set_presets();
+		y_pos=0;
 		y_pos+=20;
 		cp5.addLabel("ROTATIONS SPEED").setPosition(10,y_pos);
 		y_pos+=20;
@@ -74,16 +77,47 @@ public class ControlFrame extends PApplet {
 		y_pos+=20;
 		cp5.addButtonBar("subdivisions3").addItems(split("0 1 2 3"," ")).plugTo(parent,"subdivisions3").setPosition(10,y_pos);
 	}
+	Object[] keys_strings;
 	void set_presets() {
-		int y_pos=0;
+		y_pos=0;
 		int x_pos = 300;
-		cp5.addLabel("PRESETS").setPosition(x_pos,y_pos);
 		y_pos+=20;
+		cp5.addLabel("PRESETS").setPosition(x_pos,y_pos);
 		y_pos+=20;
 		cp5.addButton("save current").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
 		y_pos+=20;
-		cp5.addTextfield("preset name").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
-
+		preset_name_display = cp5.addTextfield("preset name").plugTo(parent,"save_presets").setPosition(x_pos,y_pos);
+		random_word();
+		y_pos+=20;
+		y_pos+=20;
+		cp5.addButton("delete all presets").setSize(100,18).plugTo(parent,"delete_all_presets").setPosition(x_pos,y_pos);
+		y_pos+=20;
+		cp5.addButton("random name").plugTo(this,"random_word").setPosition(x_pos,y_pos);
+		// println("cp5: 2 "+this.cp5);
+		y_pos+=20;
+		cp5.addLabel("SAVED PRESETS").setPosition(300,y_pos);
+		y_pos+=20;
+		Iterator keys2 = presets_json.keyIterator();
+		Set keys = presets_json.keys();
+		keys_strings = keys.toArray();
+		// println("keys : "+keys);
+		// println("json");
+		// int size = presets_json.size();
+		// println("size: "+size);
+		// Iterator key = keys.iterator();
+		int count=0;
+		while (keys2.hasNext()) {
+			// println("key: "+key);
+			String item = (String)keys2.next();
+			println("item : "+item);
+			// println("item : "+item.getClass());
+			JSONObject datum = presets_json.getJSONObject(item);
+			// println("datum: "+datum);
+			// println("datum: "+datum.getClass());
+			// ke[0].parse_presets(datum);
+			this.add_preset_button(item,count);
+			count++;
+		}
 	}
 	void reds() {
 		println("reds");
@@ -98,17 +132,29 @@ public class ControlFrame extends PApplet {
 	private ControlFrame() {
 	}
 
-	public ControlFrame(Object theParent, int theWidth, int theHeight, CheckBox this_checkbox, PGraphics _debug) {
+	public ControlFrame(Object theParent, int theWidth, int theHeight, JSONObject presets_json_, PGraphics _debug) {
 		parent = theParent;
 		w = theWidth;
 		h = theHeight;
 		debug = _debug;
-		checkbox = this_checkbox;
+		presets_json = presets_json_;
 		/*
 		*/
 	}
+	void add_preset_button(String button_label,int preset) {
+		// println("button_label: "+button_label);
+		y_pos+=20;
+		// println("cp5: "+this.cp5);
+		cp5.addButton(button_label).setPosition(300,y_pos).setSize(100,18).setValue(preset).plugTo(this,"load_presets");
+	}
+	void load_presets(int value) {
+		println("value: "+value);
+		String var_name = (String)keys_strings[0];
+		println("var_name: "+var_name);
+		JSONObject preset = presets_json.getJSONObject(var_name);
+		println("preset: "+preset);
 
-
+	}
 	public ControlP5 control() {
 		return cp5;
 	}
@@ -118,5 +164,22 @@ public class ControlFrame extends PApplet {
 
 	Object parent;
 
-
+}
+String[] generateRandomWords(int numberOfWords, int length){
+	String[] randomStrings = new String[numberOfWords];
+	Random random = new Random();
+	for(int i = 0; i < numberOfWords; i++)
+	{
+		char[] word = new char[length]; // words of length 3 through 10. (1 and 2 letter words are boring.)
+		for(int j = 0; j < word.length; j++)
+		{
+			word[j] = (char)('a' + random.nextInt(26));
+		}
+		randomStrings[i] = new String(word);
+	}
+	return randomStrings;
+}
+public void controlEvent(ControlEvent theEvent) {
+  // println(theEvent.getController().getName());
+  // n = 0;
 }

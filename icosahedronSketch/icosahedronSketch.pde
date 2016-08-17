@@ -8,6 +8,8 @@ import peasy.*;
 import controlP5.*;
 import java.util.List;
 import java.awt.Frame;
+import java.util.Random;
+import java.util.*;
 
 PeasyCam cam;
 
@@ -17,13 +19,14 @@ AudioPlayer jingle;
 BeatDetect beat;
 float beatAmt = 0;
 
-private ControlP5 cp5;
+// ControlP5 cp5;
 ControlFrame cf;
 CheckBox checkbox;
 PGraphics render, debug;
 
 String path = "C:/Users/alvaro/Dropbox/processing/geodomos/icosahedronSketch/data/";
 String presets_path = path + "presets.json";
+JSONObject presets_json = new JSONObject();
 /* OpenProcessing Tweak of *@*http://www.openprocessing.org/sketch/92464*@* */
 /* !do not delete the line above, required for linking your tweak if you upload again */
 
@@ -36,28 +39,13 @@ KinectEffect [] ke;
 float rotXSpeed,rotYSpeed; 
 
 DirectoryReader reader = new DirectoryReader();
-int current_effect_index=0;
+int effectIndex=0;
 void setup() {
 	size( 800,600, P3D );
 	println("setup");
 	// println("reader: "+reader);
 	String[] filenames = reader.listFileNames(path);
-	JSONObject json = new JSONObject();
-	try{
-
-		json = loadJSONObject(presets_path);
-	}catch (Exception e) {
-		println("e: "+e);	
-		println("File does NOT exist");
-	}
-
-	if(json!=null){
-
-		println(json);
-	}else{
-		println("File does NOT exist");
-		
-	}
+	// JSONObject json = new JSONObject();
 	if(filenames!=null){
 		println(filenames);
 
@@ -69,7 +57,8 @@ void setup() {
 	fill( 255,0,0 );
 	ke = new KinectEffect[1];
 
-	ke[current_effect_index] = (KinectEffect)new IcosahedronEffect();
+
+	ke[effectIndex] = (KinectEffect)new IcosahedronEffect();
 	minim = new Minim(this);
 
 	// use the getLineIn method of the Minim object to get an AudioInput
@@ -80,7 +69,25 @@ void setup() {
 	// debug = createGraphics(kinect.width, kinect.height);
 	debug = createGraphics(800, 600);
 	// cp5 = new ControlP5(this);
-	cf = addControlFrame("Kinect control", 500, 800, checkbox, debug);
+	presets_json = loadJSONObject(presets_path);
+	cf = addControlFrame("Kinect control", 500, 800, presets_json, debug);
+	// try{
+
+		/*
+		// println("key: "+key.next());
+		// println("key: "+key.next());
+		// println("key: "+key.next());
+		// println("key: "+key.next());
+		for (int i = 0; i < keys.size(); ++i) {
+			println("i: "+i);
+			// String value = keys[i];
+			// println("value: "+i);
+		}
+	}catch (Exception e) {
+		println("e: "+e);	
+		// println("File does NOT exist");
+	}
+		*/
 }
 boolean flag = false;
 void draw() {
@@ -144,14 +151,25 @@ void subdivisions3(int ev) {
 	// ((IcosahedronEffect)ke[0]).init(subdivs);
 
 }
+void random_word() {
+	preset_name_display.setText(generateRandomWords(1,8)[0]);
+}
+
 void save_presets() {
 	// println("a: "+a);
 	// println("hhhhhh");
+	random_word();
 	JSONObject j  = ke[0].get_settings();
 	println("j: "+j);
-	j.setInt("current_effect_index",current_effect_index);
-	j.setString("name","nammmannamamnaae");
-	saveJSONObject(j, presets_path);
-
+	j.setInt("effect_index",effectIndex);
+	String preset_name = preset_name_display.getText();
+	presets_json.setJSONObject(preset_name,j);
+	saveJSONObject(presets_json, presets_path);
+	println("presets_json: "+presets_json);
+	
+}
+void delete_all_presets() {
+	presets_json= new JSONObject();
+	saveJSONObject(presets_json, presets_path);
 	
 }
